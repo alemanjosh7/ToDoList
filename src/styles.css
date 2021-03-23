@@ -42,7 +42,7 @@ input[type="radio"] {
     margin: 0 40px;
     width: 24px;
     height: 24px;
-    background: #eeeeee;
+    background: #BFDBFE;
     box-shadow:
         inset 0 0 0 .4em white,
         0 0 0 .3em;
@@ -50,7 +50,7 @@ input[type="radio"] {
     transition: .2s;
     transform: scale(0.95);
     cursor: pointer;
-    color: #000000;
+    color: #BFDBFE;
 }
 
 input[type="radio"]:hover,

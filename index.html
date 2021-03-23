@@ -68,25 +68,12 @@
                 </div>
             </div>
 
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="sm:hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="#"
-                        class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-                    <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-                    <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                    <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
-                </div>
-            </div>
+
         </nav>
 
         <div class="container p-4 flex justify-center">
-            <div class="md:w-8/12 sm:w-10/12 lg:w-4/12">
-                <div class="md:h-6/12 flex justify-center flex-col rounded-xl p-4 shadow-xl bg-white"
+            <div class="md:w-8/12 sm:w-full lg:w-4/12" id="task-form-container">
+                <div class="min-h-full flex justify-center flex-col rounded-xl p-4 py-8 shadow-xl bg-white"
                     id="tasks-container">
                     <div class="title-card text-center">
                         <p>To Do</p>
@@ -111,19 +98,19 @@
 
                                 <div class="priority-options flex justify-around">
                                     <div class="first-option flexbox flex-col items-stretch">
-                                        <input type="radio" id="male" name="gender" class="w-7 self-center"
-                                            value="male">
-                                        <label for="male" class="text-center mt-2 text-blue-600">High</label>
+                                        <input type="radio" name="radio-priority" id="high" class="w-7 self-center"
+                                            value="High">
+                                        <label class="text-center mt-2 text-blue-600">High</label>
                                     </div>
                                     <div class="second-option flexbox flex-col items-stretch">
-                                        <input type="radio" id="female" class="w-7 self-center" name="gender"
-                                            value="female">
-                                        <label for="female" class="text-center mt-2 text-blue-600">Normal</label>
+                                        <input type="radio" value="Normal" name="radio-priority" id="normal"
+                                            class="w-7 self-center">
+                                        <label class="text-center mt-2 text-blue-600">Normal</label>
                                     </div>
                                     <div class="third-option flexbox flex-col items-stretch">
-                                        <input type="radio" id="other" class="w-7 self-center" name="gender"
-                                            value="other">
-                                        <label for="other" class="text-center mt-2 text-blue-600">Low</label>
+                                        <input type="radio" value="Low" name="radio-priority" id="low"
+                                            class="w-7 self-center">
+                                        <label class="text-center mt-2 text-blue-600">Low</label>
                                     </div>
                                 </div>
                             </fieldset>
@@ -138,6 +125,8 @@
                         </div>
 
                     </form>
+
+
                 </div>
             </div>
 
