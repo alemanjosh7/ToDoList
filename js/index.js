@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+import Swal from '../node_modules/sweetalert2'
 const db = firebase.firestore(),
   taskForm = document.getElementById("task-form"),
   taskContainer = document.getElementById("tasks-container"),
