@@ -1,5 +1,3 @@
-import swal from "sweetalert2";
-window.Swal = swal;
 const db = firebase.firestore(),
   taskForm = document.getElementById("task-form"),
   taskContainer = document.getElementById("tasks-container"),
