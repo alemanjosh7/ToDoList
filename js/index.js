@@ -25,7 +25,18 @@ const getTasks = () =>
     .get();
 
 btnIndex.addEventListener("click", () => {
-  taskContainer.innerHTML = oldForm;
+  const formPriority = document.getElementById("form-select-priority");
+  const taskList = document.getElementById("task-list");
+  const formCreateTask = document.getElementById("form-create-task");
+  if (formCreateTask.classList.contains("invisible")) {
+    formCreateTask.classList.toggle("invisible");
+    formCreateTask.classList.toggle("hidden");
+    formPriority.classList.toggle("invisible");
+    formPriority.classList.toggle("hidden");
+    taskList.classList.toggle("hidden");
+    taskList.classList.toggle("invisible");
+  }
+
   if (taskFormContainer.classList.contains("lg:w-8/12")) {
     taskFormContainer.classList.remove("lg:w-8/12");
     taskFormContainer.classList.add("lg:w-4/12");
@@ -36,6 +47,7 @@ let statusPriority = 1;
 
 selectPriority.addEventListener("change", async (e) => {
   statusPriority = selectPriority.value;
+  console.log(statusPriority);
   const taskList = document.getElementById("task-list");
   taskList.innerHTML = "";
   const queriesSnapshot = await getTasks();
@@ -396,7 +408,7 @@ selectPriority.addEventListener("change", async (e) => {
   }
 });
 
-btnListTasks.addEventListener("click", async (e) => {
+btnListTasks.addEventListener("click", () => {
   if (taskFormContainer.classList.contains("lg:w-4/12")) {
     taskFormContainer.classList.remove("lg:w-4/12");
     taskFormContainer.classList.add("lg:w-8/12");
@@ -404,16 +416,38 @@ btnListTasks.addEventListener("click", async (e) => {
 
   const formPriority = document.getElementById("form-select-priority");
   const formCreateTask = document.getElementById("form-create-task");
+  const taskList = document.getElementById("task-list");
+  const dropDown = document.getElementById("priority-select");
+  dropDown.selectedIndex = 0;
   if (formPriority.classList.contains("invisible")) {
     formCreateTask.classList.toggle("invisible");
     formCreateTask.classList.toggle("hidden");
     formPriority.classList.toggle("invisible");
     formPriority.classList.toggle("hidden");
+    if (taskList.classList.contains("invisible")) {
+      taskList.classList.toggle("hidden");
+      taskList.classList.toggle("invisible");
+      taskList.innerHTML = "";
+    }
   }
 });
 
 btnCreateTask.addEventListener("click", () => {
-  taskContainer.innerHTML = oldForm;
+  const formPriority = document.getElementById("form-select-priority");
+  const taskList = document.getElementById("task-list");
+  const formCreateTask = document.getElementById("form-create-task");
+
+  if (formCreateTask.classList.contains("invisible")) {
+    formCreateTask.classList.toggle("invisible");
+    formCreateTask.classList.toggle("hidden");
+    formPriority.classList.toggle("invisible");
+    formPriority.classList.toggle("hidden");
+    if (!taskList.classList.contains("invisible")) {
+      taskList.classList.toggle("hidden");
+      taskList.classList.toggle("invisible");
+    }
+  }
+
   if (taskFormContainer.classList.contains("lg:w-8/12")) {
     taskFormContainer.classList.remove("lg:w-8/12");
     taskFormContainer.classList.add("lg:w-4/12");
@@ -424,21 +458,65 @@ btnCreateTask.addEventListener("click", () => {
 //data
 // });
 
-taskContainer.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const title = document.getElementById("task-title");
-  const description = document.getElementById("task-description");
-  var ele = document.getElementsByName("radio-priority");
-  let priority;
-  for (i = 0; i < ele.length; i++) {
-    if (ele[i].checked) priority = ele[i].value;
-  }
-  const timeTask = document.getElementById("time-task");
-  //creamos la coleccion(traduccion SQL = tabla) tasks para almacenar las tareas y crear documentos(traduccion a SQL = registros)
-  await saveTask(title.value, timeTask.value, priority, description.value);
-  console.log(priority);
-  document.getElementById("task-form").reset();
+// const title = document.getElementById("task-title");
+// const description = document.getElementById("task-description");
+// const ele = document.querySelector('#task-form input[name="radio-priority"]');
+// const timeTask = document.getElementById("#task-form time-task");
 
-  title.focus();
+const validationInputs = (title, description, ele, timeTask) => {
+  if (
+    title.value == "" ||
+    description.value == "" ||
+    ele == "" ||
+    timeTask.value == ""
+  )
+    return false;
+  return true;
+};
+
+taskContainer.addEventListener("submit", async (e) => {
+  //creamos la coleccion(traduccion SQL = tabla) tasks para almacenar las tareas y crear documentos(traduccion a SQL = registros)
+  let ele = [
+    taskForm.high.checked,
+    taskForm.normal.checked,
+    taskForm.low.checked,
+  ];
+  let priorities = ["High", "Normal", "Low"];
+  let priority = "";
+  for (i = 0; i < 3; i++) {
+    if (ele[i]) priority = priorities[i];
+  }
+  console.log(
+    taskForm.taskTitle.value,
+    taskForm.taskDescription.value,
+    priority,
+    taskForm.timeTask.value
+  );
+  e.preventDefault();
+  if (
+    validationInputs(
+      taskForm.taskTitle,
+      taskForm.taskDescription,
+      priority,
+      taskForm.timeTask
+    )
+  ) {
+    Swal.fire(
+      "Congratulations",
+      `Your task named ${taskForm.taskTitle.value} was added`,
+      "success"
+    );
+    await saveTask(
+      taskForm.taskTitle.value,
+      taskForm.taskDescription.value,
+      priority,
+      taskForm.timeTask.value
+    );
+    document.getElementById("task-form").reset();
+  } else {
+    Swal.fire("Oops...", "Something went wrong!", "error");
+  }
+
+  taskForm.taskTitle.focus();
   //para almacenar y tomar los datos usamos problemas(async await)
 });

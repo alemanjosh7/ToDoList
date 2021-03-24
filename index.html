@@ -83,13 +83,13 @@
                         <form id="task-form">
                             <div class="form-group">
                                 <p class="label text-blue-600">Task Title</p>
-                                <input type="text" id="task-title"
+                                <input type="text" id="taskTitle"
                                     class="form-control w-full p-2 mb-6 text-black border-b-2 border-blue-500 outline-none focus:bg-gray-300">
                             </div>
 
                             <div class="form-group">
                                 <p class="block mb-2 text-blue-600">Scheduled Time</p>
-                                <input type="datetime-local" id="time-task"
+                                <input type="datetime-local" id="timeTask"
                                     class="form-control w-full p-2 mb-6 text-black border-b-2 border-blue-500 outline-none focus:bg-gray-300">
                             </div>
                             <div class="form-group priority">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="form-group">
                                 <p class="label text-blue-600">Description</p>
-                                <textarea id="task-description" rows="3"
+                                <textarea id="taskDescription" rows="3"
                                     class="form-control w-full p-2 mb-6 text-black border-b-2 border-blue-500 outline-none focus:bg-gray-300"></textarea>
                             </div>
                             <div class="send-task w-full flex justify-center">
@@ -151,7 +151,7 @@
 
         </div>
     </div>
-
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
 
