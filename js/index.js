@@ -1,4 +1,3 @@
-import Swal from '../node_modules/sweetalert2'
 const db = firebase.firestore(),
   taskForm = document.getElementById("task-form"),
   taskContainer = document.getElementById("tasks-container"),
@@ -509,9 +508,9 @@ taskContainer.addEventListener("submit", async (e) => {
     );
     await saveTask(
       taskForm.taskTitle.value,
-      taskForm.taskDescription.value,
+      taskForm.timeTask.value,
       priority,
-      taskForm.timeTask.value
+      taskForm.taskDescription.value,
     );
     document.getElementById("task-form").reset();
   } else {
